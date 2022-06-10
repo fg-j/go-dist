@@ -31,7 +31,8 @@ jobs:
   approve:
     name: Approve Bot PRs
     needs: download
-    if: ${{ needs.download.outputs.pr-author == 'paketo-bot' || needs.download.outputs.pr-author == 'dependabot[bot]' }}
+    # if: ${{ needs.download.outputs.pr-author == 'paketo-bot' || needs.download.outputs.pr-author == 'dependabot[bot]' }}
+    if: ${{ contains(fromJSON('[ "paketo-bot", "dependabot[bot]", "github-actions[bot]" ]'), needs.download.outputs.pr-author) }}
     runs-on: ubuntu-latest
     steps:
     # - name: Check Commit Verification
